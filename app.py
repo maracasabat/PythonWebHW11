@@ -1,12 +1,4 @@
-from flask import Flask
-
-app = Flask(__name__)
-
-
-@app.route('/healthcheck')
-def healthcheck():
-    return "It's alive!"
-
+from src import app
 
 if __name__ == "__main__":
     app.run()
