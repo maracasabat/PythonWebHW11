@@ -48,10 +48,11 @@ def delete(id):
 
 
 #
+@app.route('/update', defaults={'id': None}, methods=['POST'])
 @app.route('/update/<int:id>', methods=['GET', 'POST'], strict_slashes=False)
 def update(id):
-    user = User.query.get(id)
     if request.method == 'POST':
+        user = User.query.get(request.form['id'])
         user.name = request.form['name']
         user.phone = request.form['phone']
         user.email = request.form['email']
@@ -59,4 +60,5 @@ def update(id):
         db.session.commit()
         flash('Contact updated successfully!')
         return redirect(url_for('index'))
+    user = User.query.get(id)
     return render_template('update.html', user=user)
